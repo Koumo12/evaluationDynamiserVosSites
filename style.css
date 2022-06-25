@@ -2,8 +2,7 @@ body {
     padding: 5rem;
     font-family: 'Lato', sans-serif;
     font-size: 2rem;
-    background-color: rgba(177, 133, 90, 0.96);
-    
+    background-color: rgba(177, 133, 90, 0.96);   
 }
 
 .page {
@@ -55,9 +54,10 @@ p {
 }
 
 .dice {
-    justify-content: center;
+    
     text-align: center;
     margin-bottom: 3rem;
+    
 }
 
 .dice-area {
@@ -65,13 +65,14 @@ p {
     height: 6rem;
     background-color: aqua;
     margin-top: 4rem;
-    margin-bottom: 6rem;
-    margin-left: 6.5rem;
+    margin-bottom: 4rem;
+    display: inline-block;
+    /* margin-left: 6.5rem; */
 }
 
 .roll_dice {
     font-size: 1.2rem;
-    margin-top: 8rem;
+    margin-top: 5rem;
 }
 
 .hold {
