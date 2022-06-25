@@ -13,13 +13,32 @@ const roll_dice = function()
 const clickSurBouton = function() 
 {
     // Lancer le dé virtuel et récupérer le résultat
-    const résultat = roll_dice();
+    const resultat = roll_dice();
 
-    const dice_area = document.getElementsByClassName('dice-area');
-     // Récuépérer l´image
-     const image = document.getElementById('img-dice');
-     // Ajouter l´attribut
-     image.src = 'images/dice-'+ résultat + '.png';
+     
+
+    // jouer la bande de video
+    const audio = new Audio('images/sonDe.mp3');
+
+    // Quand la bande est chargé, lancer le son 
+    audio.addEventListener("canplaythrough", function() 
+    {
+        audio.play();
+    });
+
+    // Quand la bande son est finie, afficher l´image
+
+    audio.addEventListener('ended', function() {
+        const dice_area = document.getElementsByClassName('dice-area');
+        // Récuépérer l´image
+        const image = document.getElementById('img-dice');
+        // Ajouter l´attribut
+        image.src = 'images/dice-'+ resultat + '.png';
+    
+       const score1 = document.getElementById('score1');
+       score1.textContent = resultat;
+       
+    });
 }
 
 // Récupérer le bouton
