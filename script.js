@@ -29,21 +29,37 @@ if (setTimeout("localStorage.score4.clear()"))
 }
 
 // calcul du nombre aléatoire
-const roll_dice = function() 
-{
-    // Générer un nombre entre 1 et 6
-    const nbreDecimal = (Math.random() * 6) + 1;
-    const nbre = Math.trunc(nbreDecimal);
+var cube = document.querySelector('.cube');
+var rollBtn = document.querySelector('.rollBtn');
+var currentClass = '';
+let randNum =0;
 
-    // Retourne ce nombre
-    return nbre;
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
+
+// Lancer le dé virtuel et récupérer le résultat
+function rollDice() 
+{
+    randNum =getRandomInt(1,7)
+    console.log(randNum )
+    var showClass = 'show-' + randNum;
+    console.log(showClass)
+    if ( currentClass ) {
+    cube.classList.remove( currentClass );
+    }
+    cube.classList.add( showClass );
+    currentClass = showClass;
+}
+    rollDice() ;
 
 // Jouer un partie en cliquant sur la touche Roll Dice
 const jouerManche = function() 
 {
-    // Lancer le dé virtuel et récupérer le résultat
-    const resultats = roll_dice();
+    
+    rollDice();
 
 
     // jouer la bande de video
@@ -59,11 +75,7 @@ const jouerManche = function()
 
     audio.addEventListener('ended', function() 
     {
-        // Récuépérer l´image
-        const image = document.getElementById('img-dice');
-        // Ajouter l´attribut
-        image.src = 'images/dice-'+ resultats + '.png';
-
+       
         // If - else: pour passer le jeux á l´autre joueur
         if(((parseInt(localStorage.score1) === 0) && (parseInt(localStorage.score4) === 0)) || ((parseInt(localStorage.score1) != 0) && (parseInt(localStorage.score4) != 0) && (parseInt(localStorage.score) === 0) && (parseInt(localStorage.score3) === 0)&& (focus2.style.visibility === 'visible')) || ((parseInt(localStorage.score1) != 0) && (parseInt(localStorage.score4) != 0) && (parseInt(localStorage.score) != 0) && (parseInt(localStorage.score3) === 0)&& (focus1.style.visibility === 'visible')))
         {
@@ -73,7 +85,7 @@ const jouerManche = function()
             // Additionner le resultat du nombres aléatoire du joueur 1    
             if(localStorage.score)
             {
-                localStorage.score = Number(localStorage.score) + resultats;
+                localStorage.score = Number(localStorage.score) + randNum;
             } else{
                 localStorage.score = 0;
             }
@@ -89,7 +101,7 @@ const jouerManche = function()
             // Additionner le resultat du nombres aléatoire du joueur 2
             if(localStorage.score3)
             {
-                localStorage.score3 = Number(localStorage.score3) + resultats;
+                localStorage.score3 = Number(localStorage.score3) + randNum;
             } else{
                 localStorage.score3 = 0;
             }
